@@ -1,5 +1,5 @@
 import json
-import datetime from datetime
+from  datetime import datetime
 
 def load_operations():
     """
@@ -32,5 +32,8 @@ def get_operations(operations):
     Переводит дату в формат ДД.ММ.ГГГГ.
     """
 
-    pass
+    executed_operations = [operation for operation in operations if operation and operation["state"] == "EXECUTED"]
+    executed_operations.sort(key=lambda x: datetime.fromisoformat(x["date"]), reverse=True)
+    last_operations = executed_operations[:5]
+    return last_operations
 
